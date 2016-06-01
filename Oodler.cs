@@ -8,8 +8,30 @@ namespace Oodle
 {
     class Oodle
     {
-        public static string Oodler(string TextToOodle)
+        private struct OodleReturn
         {
+            private string _oodledString;
+            private List<char> RemovedVowels;
+
+            public string OodledString { get { return _oodledString; } set { this._oodledString = value; } }
+
+            public OodleReturn(string TextToOodle)
+            {
+                this._oodledString = TextToOodle;
+                RemovedVowels = new List<char>();
+            }
+        }
+
+        OodleReturn oodleReturn;
+
+        public Oodle(string TextToOodle)
+        {
+            oodleReturn = new OodleReturn(TextToOodle);
+        }
+
+        public string[] Oodler(string TextToOodle)
+        {
+            
             string OodledText = "";
             foreach(char character in TextToOodle)
             {
@@ -37,7 +59,8 @@ namespace Oodle
                 }
             }
 
-            return OodledText;
+            OodleReturn.OodledString = OodledText;
+            return OodleReturn;
         }
 
         public static string DeOodler(string TextToDeOodle)
